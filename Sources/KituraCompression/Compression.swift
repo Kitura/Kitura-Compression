@@ -49,17 +49,14 @@ public class Compression : RouterMiddleware {
         }
         // prefer gzip over deflate?
         
-        guard let contentLength = request.headers["Content-Length"] where Int(contentLength) > threshold else {
-            Log.info("Not compressed: body is smaller than the threshold")
-            next()
-            return
-        }
-        
         var previousPreWriteHandler: PreWriteLifecycleHandler? = nil
         let preWriteHandler: PreWriteLifecycleHandler = { body, request, response in
-            var inputData = NSMutableData()
-            inputData = body.copy() as! NSMutableData // ????
-            guard let compressed = self.compress(inputData, method: encodingMethod) else {
+            guard body.length > self.threshold else {
+                Log.info("Not compressed: body \(body.length) is smaller than the threshold \(self.threshold)")
+                return previousPreWriteHandler!(body: body, request: request, response: response)
+            }
+
+            guard let compressed = self.compress(NSMutableData(data: body), method: encodingMethod) else {
                 Log.info("Not compressed: compression failed")
                 return previousPreWriteHandler!(body: body, request: request, response: response)
             }
@@ -87,7 +84,7 @@ public class Compression : RouterMiddleware {
         guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, MAX_WBITS + 16, MAX_MEM_LEVEL, compressionStrategy.rawValue, ZLIB_VERSION, STREAM_SIZE) == Z_OK else {
             return nil
         }
-        
+
         let compressedData = NSMutableData(length: chunkSize)!
         while stream.avail_out == 0 {
             if Int(stream.total_out) >= compressedData.length {
@@ -99,7 +96,6 @@ public class Compression : RouterMiddleware {
             
             deflate(&stream, Z_FINISH)
         }
-        
         deflateEnd(&stream)
         compressedData.length = Int(stream.total_out)
         
