@@ -14,8 +14,6 @@
  * limitations under the License.
  **/
 
-// import CZlib
-
 public enum CompressionStrategy: Int32 {
     case defaultStrategy = 0, filtered, huffmanOnly, rle, fixed
 }
