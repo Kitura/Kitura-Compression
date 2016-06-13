@@ -42,7 +42,7 @@ public class Compression : RouterMiddleware {
     
     public func handle(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
         
-        guard let encodingMethod = request.accepts(["gzip", "deflate", "identity"], encoding: true)
+        guard let encodingMethod = request.accepts(header: "Accept-Encoding", types: ["gzip", "deflate", "identity"])
             where encodingMethod != "identity" else {
                 Log.info("Not compressed: couldn't find acceptable encoding")
                 next()
