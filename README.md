@@ -7,7 +7,7 @@ Kitura compression middleware
 ![Apache 2](https://img.shields.io/badge/license-Apache2-blue.svg?style=flat)
 
 ## Summary
-Kitura compression middleware. Supports `deflate` and `gzip` compression methods. Uses [zlib](http://zlib.net/).
+Kitura compression middleware for compressing body data sent back to the client. Supports `deflate` and `gzip` compression methods. Uses [zlib](http://zlib.net/).
 
 
 ## Table of Contents
@@ -33,22 +33,14 @@ You can configure `Compression` with optional arguments:
 ```
 **Where:**
    - *threshold* is the byte threshold for the response body size before compression is considered for the response, defaults to 1024.
+
    - *chunkSize* is the size of internal output slab buffer in bytes, defaults to 16384
-   - *compressionLevel* is the level of zlib compression to apply. The supported levels are:
- ```c  
-#define Z_NO_COMPRESSION         0
-#define Z_BEST_SPEED             1
-#define Z_BEST_COMPRESSION       9
-#define Z_DEFAULT_COMPRESSION  (-1)
-  ```
-   - *compressionStrategy* is is used to tune the compression algorithm. Here are its possible values:
-   ```c
-#define Z_FILTERED            1
-#define Z_HUFFMAN_ONLY        2
-#define Z_RLE                 3
-#define Z_FIXED               4
-#define Z_DEFAULT_STRATEGY    0
-```
+
+   - *compressionLevel* is the level of zlib compression to apply. The supported values are:  
+   .noCompression, .bestSpeed, .bestCompression, .defaultCompression
+
+   - *compressionStrategy* is used to tune the compression algorithm. Here are its possible values:  
+   .defaultStrategy, .filtered, .huffmanOnly, .rle, .fixed
    - *memoryLevel* specifies how much memory should be allocated
    for the internal compression state. The default value is 8.
 

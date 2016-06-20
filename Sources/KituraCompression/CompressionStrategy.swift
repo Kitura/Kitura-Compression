@@ -17,9 +17,3 @@
 public enum CompressionStrategy: Int32 {
     case defaultStrategy = 0, filtered, huffmanOnly, rle, fixed
 }
-
-//#define Z_FILTERED            1
-//#define Z_HUFFMAN_ONLY        2
-//#define Z_RLE                 3
-//#define Z_FIXED               4
-//#define Z_DEFAULT_STRATEGY    0

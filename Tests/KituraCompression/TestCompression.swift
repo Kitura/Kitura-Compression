@@ -41,7 +41,6 @@ class TestCompression : XCTestCase {
     }
 
     let router = TestCompression.setupRouter()
-
     
     static let body1 = "Shall I compare thee to a summer's day? Thou art more lovely and more temperate: Rough winds do shake the darling buds of May, And summer's lease hath all too short a date:"
     
@@ -97,7 +96,7 @@ class TestCompression : XCTestCase {
                     XCTFail("No response body")
                 }
                 expectation.fulfill()
-                }, headers: ["Accept-encoding": "deflate"])
+            }, headers: ["Accept-encoding": "deflate"])
         }
     }
 
@@ -117,10 +116,9 @@ class TestCompression : XCTestCase {
                     XCTFail("No response body")
                 }
                 expectation.fulfill()
-                }, headers: ["Accept-encoding": "gzip, deflate"])
+            }, headers: ["Accept-encoding": "gzip, deflate"])
         }
     }
-
 
     static func setupRouter() -> Router {
         let router = Router()
@@ -141,7 +139,6 @@ class TestCompression : XCTestCase {
             catch {}
             next()
         }
-
 
         return router
     }

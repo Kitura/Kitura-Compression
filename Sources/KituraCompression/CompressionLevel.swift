@@ -15,8 +15,8 @@
  **/
 
 public enum CompressionLevel: Int32 {
-    case noCompression = 0       // Z_NO_COMPRESSION
-    case bestSpeed = 1           // Z_BEST_SPEED
-    case bestCompression = 9     // Z_BEST_COMPRESSION
-    case defaultCompression = -1 // Z_DEFAULT_COMPRESSION
+    case noCompression = 0
+    case bestSpeed = 1
+    case bestCompression = 9
+    case defaultCompression = -1 
 }

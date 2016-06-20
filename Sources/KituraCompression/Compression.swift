@@ -56,11 +56,13 @@ public class Compression : RouterMiddleware {
                 return previousWrittenDataFilter!(body: body)
             }
             
-            guard let compressed = self.compress(NSMutableData(data: body), method: encodingMethod, response: response) else {
+            guard let compressed = self.compress(body, method: encodingMethod) else {
                 Log.info("Not compressed: compression failed")
                 return previousWrittenDataFilter!(body: body)
             }
             
+            response.headers["Content-Encoding"] = encodingMethod
+            response.headers["Content-Length"] = String(compressed.length)
             return previousWrittenDataFilter!(body: compressed)
         }
         previousWrittenDataFilter = response.setWrittenDataFilter(writtenDataFilter)
@@ -70,8 +72,9 @@ public class Compression : RouterMiddleware {
     
     
     
-    private func compress(_ inputData: NSMutableData, method: String, response: RouterResponse) -> NSData? {
-        var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(inputData.bytes), avail_in: uint(inputData.length), total_in: 0, next_out: nil, avail_out: 0, total_out: 0, msg: nil, state: nil, zalloc: nil, zfree: nil, opaque: nil, data_type: 0, adler: 0, reserved: 0)
+    private func compress(_ inputData: NSData, method: String) -> NSData? {
+        let inputMutableData = NSMutableData(data: inputData)
+        var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(inputMutableData.bytes), avail_in: uint(inputMutableData.length), total_in: 0, next_out: nil, avail_out: 0, total_out: 0, msg: nil, state: nil, zalloc: nil, zfree: nil, opaque: nil, data_type: 0, adler: 0, reserved: 0)
         
         let windowBits = (method == "gzip") ? MAX_WBITS + 16 : MAX_WBITS
         guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream))) == Z_OK else {
@@ -92,8 +95,6 @@ public class Compression : RouterMiddleware {
         deflateEnd(&stream)
         
         compressedData.length = Int(stream.total_out)
-        response.headers["Content-Encoding"] = method
-        response.headers["Content-Length"] = String(compressedData.length)
         return NSData(data: compressedData)
     }
 }
