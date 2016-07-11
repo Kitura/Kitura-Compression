@@ -65,7 +65,11 @@ class TestCompression : XCTestCase {
                         XCTFail("No response body")
                         return
                     }
-                    XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyGzip)
+                    #if os(Linux)
+                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyGzip)
+                    #else
+                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyGzip)
+                    #endif
                 }
                 catch{
                     XCTFail("No response body")
@@ -90,7 +94,11 @@ class TestCompression : XCTestCase {
                         XCTFail("No response body")
                         return
                     }
-                    XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyDeflate)
+                    #if os(Linux)
+                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyDeflate)
+                    #else
+                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyDeflate)
+                    #endif
                 }
                 catch{
                     XCTFail("No response body")
