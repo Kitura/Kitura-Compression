@@ -81,7 +81,7 @@ public class Compression : RouterMiddleware {
         var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(inputMutableData.bytes), avail_in: uint(inputMutableData.length), total_in: 0, next_out: nil, avail_out: 0, total_out: 0, msg: nil, state: nil, zalloc: nil, zfree: nil, opaque: nil, data_type: 0, adler: 0, reserved: 0)
         
         let windowBits = (method == "gzip") ? MAX_WBITS + 16 : MAX_WBITS
-        guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream))) == Z_OK else {
+        guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream.self))) == Z_OK else {
             return nil
         }
         
