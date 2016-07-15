@@ -73,11 +73,15 @@ public class Compression : RouterMiddleware {
     
     
     private func compress(_ inputData: NSData, method: String) -> NSData? {
-        let inputMutableData = NSMutableData(data: inputData)
+        #if os(Linux)
+            let inputMutableData = NSMutableData(data: inputData)
+        #else
+            let inputMutableData = NSMutableData(data: inputData as Data)
+        #endif
         var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(inputMutableData.bytes), avail_in: uint(inputMutableData.length), total_in: 0, next_out: nil, avail_out: 0, total_out: 0, msg: nil, state: nil, zalloc: nil, zfree: nil, opaque: nil, data_type: 0, adler: 0, reserved: 0)
         
         let windowBits = (method == "gzip") ? MAX_WBITS + 16 : MAX_WBITS
-        guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream))) == Z_OK else {
+        guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream.self))) == Z_OK else {
             return nil
         }
         
@@ -95,7 +99,11 @@ public class Compression : RouterMiddleware {
         deflateEnd(&stream)
         
         compressedData.length = Int(stream.total_out)
-        return NSData(data: compressedData)
+        #if os(Linux)
+            return NSData(data: compressedData)
+        #else
+            return NSData(data: compressedData as Data)
+        #endif
     }
 }
 

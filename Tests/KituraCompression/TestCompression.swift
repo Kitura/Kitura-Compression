@@ -65,7 +65,11 @@ class TestCompression : XCTestCase {
                         XCTFail("No response body")
                         return
                     }
-                    XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyGzip)
+                    #if os(Linux)
+                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyGzip)
+                    #else
+                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyGzip)
+                    #endif
                 }
                 catch{
                     XCTFail("No response body")
@@ -90,7 +94,11 @@ class TestCompression : XCTestCase {
                         XCTFail("No response body")
                         return
                     }
-                    XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyDeflate)
+                    #if os(Linux)
+                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyDeflate)
+                    #else
+                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyDeflate)
+                    #endif
                 }
                 catch{
                     XCTFail("No response body")
@@ -126,7 +134,7 @@ class TestCompression : XCTestCase {
         router.all(middleware: Compression(threshold: 100))
         router.get("/sonnet18/1") { _, response, next in
             do {
-                try response.end(body1)
+                try response.send(body1).end()
             }
             catch {}
             next()
@@ -134,7 +142,7 @@ class TestCompression : XCTestCase {
         
         router.get("/sonnet18/2") { _, response, next in
             do {
-                try response.end(body2)
+                try response.send(body2).end()
             }
             catch {}
             next()
