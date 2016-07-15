@@ -134,7 +134,7 @@ class TestCompression : XCTestCase {
         router.all(middleware: Compression(threshold: 100))
         router.get("/sonnet18/1") { _, response, next in
             do {
-                try response.end(body1)
+                try response.send(body1).end()
             }
             catch {}
             next()
@@ -142,7 +142,7 @@ class TestCompression : XCTestCase {
         
         router.get("/sonnet18/2") { _, response, next in
             do {
-                try response.end(body2)
+                try response.send(body2).end()
             }
             catch {}
             next()
