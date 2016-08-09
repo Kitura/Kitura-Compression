@@ -32,7 +32,7 @@ public class Compression : RouterMiddleware {
     
     public var memoryLevel : Int32
     
-    public init (threshold: Int = 1024, chunkSize: Int = 16384, compressionLevel: CompressionLevel = CompressionLevel.defaultCompression, compressionStrategy: CompressionStrategy = CompressionStrategy.defaultStrategy, memoryLevel: Int32 = 8) {
+    public init (threshold: Int = 1024, chunkSize: Int = 65536, compressionLevel: CompressionLevel = CompressionLevel.defaultCompression, compressionStrategy: CompressionStrategy = CompressionStrategy.defaultStrategy, memoryLevel: Int32 = 8) {
         self.threshold = threshold
         self.chunkSize = chunkSize
         self.compressionLevel = compressionLevel
@@ -42,8 +42,7 @@ public class Compression : RouterMiddleware {
     
     public func handle(request: RouterRequest, response: RouterResponse, next: () -> Void) throws {
         
-        guard let encodingMethod = request.accepts(header: "Accept-Encoding", types: ["gzip", "deflate", "identity"])
-            where encodingMethod != "identity" else {
+        guard let encodingMethod = request.accepts(header: "Accept-Encoding", types: ["gzip", "deflate", "identity"]), encodingMethod != "identity" else {
                 Log.info("Not compressed: couldn't find acceptable encoding")
                 next()
                 return
@@ -51,8 +50,8 @@ public class Compression : RouterMiddleware {
         
         var previousWrittenDataFilter: WrittenDataFilter? = nil
         let writtenDataFilter: WrittenDataFilter = { body in
-            guard body.length > self.threshold else {
-                Log.info("Not compressed: body \(body.length) is smaller than the threshold \(self.threshold)")
+            guard body.count > self.threshold else {
+                Log.info("Not compressed: body \(body.count) is smaller than the threshold \(self.threshold)")
                 return previousWrittenDataFilter!(body: body)
             }
             
@@ -62,7 +61,7 @@ public class Compression : RouterMiddleware {
             }
             
             response.headers["Content-Encoding"] = encodingMethod
-            response.headers["Content-Length"] = String(compressed.length)
+            response.headers["Content-Length"] = String(compressed.count)
             return previousWrittenDataFilter!(body: compressed)
         }
         previousWrittenDataFilter = response.setWrittenDataFilter(writtenDataFilter)
@@ -72,38 +71,37 @@ public class Compression : RouterMiddleware {
     
     
     
-    private func compress(_ inputData: NSData, method: String) -> NSData? {
-        #if os(Linux)
-            let inputMutableData = NSMutableData(data: inputData)
-        #else
-            let inputMutableData = NSMutableData(data: inputData as Data)
-        #endif
-        var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(inputMutableData.bytes), avail_in: uint(inputMutableData.length), total_in: 0, next_out: nil, avail_out: 0, total_out: 0, msg: nil, state: nil, zalloc: nil, zfree: nil, opaque: nil, data_type: 0, adler: 0, reserved: 0)
+    private func compress(_ inputData: Data, method: String) -> Data? {
         
-        let windowBits = (method == "gzip") ? MAX_WBITS + 16 : MAX_WBITS
-        guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED, windowBits, memoryLevel, compressionStrategy.rawValue, ZLIB_VERSION, Int32(sizeof(z_stream.self))) == Z_OK else {
-            return nil
-        }
+        return inputData.withUnsafeBytes() { (bytes: UnsafePointer<Bytef>) -> Data? in
+            var stream = z_stream(next_in: UnsafeMutablePointer<Bytef>(bytes),
+                                  avail_in: uint(inputData.count),
+                                  total_in: 0, next_out: nil, avail_out: 0,
+                                  total_out: 0, msg: nil, state: nil, zalloc: nil,
+                                  zfree: nil, opaque: nil, data_type: 0, adler: 0,
+                                  reserved: 0)
         
-        let compressedData = NSMutableData(length: chunkSize)!
-        while stream.avail_out == 0 {
-            if Int(stream.total_out) >= compressedData.length {
-                compressedData.length += chunkSize
+            let windowBits = (method == "gzip") ? MAX_WBITS + 16 : MAX_WBITS
+            guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED,
+                                windowBits, memoryLevel, compressionStrategy.rawValue,
+                                ZLIB_VERSION, Int32(sizeof(z_stream.self))) == Z_OK else {
+                return nil
             }
-            
-            stream.next_out = UnsafeMutablePointer<Bytef>(compressedData.mutableBytes).advanced(by: Int(stream.total_out))
-            stream.avail_out = uInt(compressedData.length) - uInt(stream.total_out)
-            
-            deflate(&stream, Z_FINISH)
-        }
-        deflateEnd(&stream)
         
-        compressedData.length = Int(stream.total_out)
-        #if os(Linux)
-            return NSData(data: compressedData)
-        #else
-            return NSData(data: compressedData as Data)
-        #endif
+            var compressedData = Data()
+            var compressBuffer = [Bytef](repeating: 0, count: chunkSize)
+            while stream.avail_out == 0 {
+                stream.next_out = UnsafeMutablePointer<Bytef>(compressBuffer)
+                stream.avail_out = uint(chunkSize)
+            
+                deflate(&stream, Z_FINISH)
+                
+                compressedData.append(&compressBuffer, count: chunkSize-Int(stream.avail_out))
+            }
+            deflateEnd(&stream)
+            
+            return compressedData
+        }
     }
 }
 
