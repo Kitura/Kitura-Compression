@@ -54,22 +54,18 @@ class TestCompression : XCTestCase {
     	performServerTest(router) { expectation in
             self.performRequest("get", path:"/sonnet18/1", callback: {response in
                 XCTAssertNotNil(response, "ERROR!!! ClientRequest response object was nil")
-                guard let encoding = response!.headers["Content-Encoding"] where encoding.count > 0 else {
+                guard let encoding = response!.headers["Content-Encoding"], encoding.count > 0 else {
                     XCTFail("No encoding")
                     return
                 }
                 XCTAssertEqual(encoding[0], "gzip")
                 do {
-                    let body = NSMutableData()
-                    guard try response!.readAllData(into: body) > 0 else {
+                    var body = Data()
+                    guard try response!.readAllData(into: &body) > 0 else {
                         XCTFail("No response body")
                         return
                     }
-                    #if os(Linux)
-                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyGzip)
-                    #else
-                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyGzip)
-                    #endif
+                    XCTAssertEqual(body.base64EncodedString(), TestCompression.compressedBodyGzip)
                 }
                 catch{
                     XCTFail("No response body")
@@ -83,22 +79,18 @@ class TestCompression : XCTestCase {
         performServerTest(router) { expectation in
             self.performRequest("get", path:"/sonnet18/1", callback: {response in
                 XCTAssertNotNil(response, "ERROR!!! ClientRequest response object was nil")
-                guard let encoding = response!.headers["Content-Encoding"] where encoding.count > 0 else {
+                guard let encoding = response!.headers["Content-Encoding"], encoding.count > 0 else {
                     XCTFail("No encoding")
                     return
                 }
                 XCTAssertEqual(encoding[0], "deflate")
                 do {
-                    let body = NSMutableData()
-                    guard try response!.readAllData(into: body) > 0 else {
+                    var body = Data()
+                    guard try response!.readAllData(into: &body) > 0 else {
                         XCTFail("No response body")
                         return
                     }
-                    #if os(Linux)
-                        XCTAssertEqual(body.base64EncodedString([]), TestCompression.compressedBodyDeflate)
-                    #else
-                        XCTAssertEqual(body.base64EncodedString(options: []), TestCompression.compressedBodyDeflate)
-                    #endif
+                    XCTAssertEqual(body.base64EncodedString(), TestCompression.compressedBodyDeflate)
                 }
                 catch{
                     XCTFail("No response body")
