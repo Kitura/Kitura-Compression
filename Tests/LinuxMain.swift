@@ -16,7 +16,7 @@
 
 import XCTest
 
-@testable import KituraCompressionTestSuite
+@testable import KituraCompressionTests
 
 XCTMain([
 	testCase(TestCompression.allTests)
