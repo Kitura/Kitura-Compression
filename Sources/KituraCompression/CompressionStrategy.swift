@@ -26,14 +26,14 @@ public enum CompressionStrategy: Int32 {
     case defaultStrategy = 0
     
     /// Force more Huffman coding and less string matching.
-    case filtered
+    case filtered = 1
     
     /// Force Huffman encoding only (no string match).
-    case huffmanOnly
+    case huffmanOnly = 2
     
     /// Limit match distances to one (run-length encoding)
-    case rle
+    case rle = 3
     
     /// Prevent the use of dynamic Huffman codes.
-    case fixed
+    case fixed = 4
 }
