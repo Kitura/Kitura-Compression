@@ -16,7 +16,7 @@
 
 // MARK CompressionStrategy
 
-/// The strategy parameter of zlib compression.
+/// The strategy parameter for zlib compression.
 /// The strategy is used to tune the compression algorithm, it affects the 
 /// compression ratio but not the correctness of the compressed output.
 /// For more information, see [zlib manual](http://www.zlib.net/manual.html).

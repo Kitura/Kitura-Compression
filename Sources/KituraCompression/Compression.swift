@@ -23,19 +23,19 @@ import Foundation
 // MARK Compression
 
 /// A middleware for compressing body data sent back to the client. 
-/// Supports deflate and gzip compression methods. Uses [zlib](http://zlib.net/).
+/// Supports the deflate and the gzip compression methods. Uses [zlib](http://zlib.net/).
 public class Compression : RouterMiddleware {
     
-    /// The byte threshold for the response body size before 
+    /// The byte count threshold for the response body size before
     /// compression is considered for the response.
     /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
     public var threshold: Int
     
-    /// The size of internal output slab buffer in bytes.
+    /// The size of the internal output slab buffer in bytes.
     /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
     public var chunkSize: Int
     
-    /// The level of zlib compression to apply. 
+    /// The level of zlib compression to apply.
     /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
     public var compressionLevel: CompressionLevel
     
@@ -43,15 +43,15 @@ public class Compression : RouterMiddleware {
     /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
     public var compressionStrategy: CompressionStrategy
     
-    /// The level of the memory to specify how much memory should be 
+    /// The level of the compression memory, used to specify how much memory should be
     /// allocated for the internal compression state.
     /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
     public var memoryLevel: Int32
     
     /// Initialize an instance of `Compression`.
     ///
-    /// - Parameter threshold: The byte threshold for the response body size
-    /// - Parameter chunkSize: The size of internal output slab buffer in bytes.
+    /// - Parameter threshold: The byte count threshold for the response body size.
+    /// - Parameter chunkSize: The size of the internal output slab buffer in bytes.
     /// - Parameter compressionLevel: The level of zlib compression to apply.
     /// - Parameter compressionStrategy: The strategy of zlib compression to apply.
     /// - Parameter memoryLevel: The level of the memory to be allocated during the compression.
@@ -63,7 +63,7 @@ public class Compression : RouterMiddleware {
         self.memoryLevel = memoryLevel
     }
     
-    /// Handle an incoming request: compress the body of the response.
+    /// Handle an incoming request, compressing the body of the response, if applicable.
     ///
     /// - Parameter request: The `RouterRequest` object used to get information
     ///                     about the request.
