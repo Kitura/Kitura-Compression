@@ -82,6 +82,8 @@ public class Compression : RouterMiddleware {
                 return
         }
         
+        print("Compression:handle: method = ", encodingMethod)
+        
         var previousWrittenDataFilter: WrittenDataFilter? = nil
         let writtenDataFilter: WrittenDataFilter = { body in
             guard body.count > self.threshold else {
