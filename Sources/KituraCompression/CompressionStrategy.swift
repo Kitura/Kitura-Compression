@@ -14,6 +14,26 @@
  * limitations under the License.
  **/
 
+// MARK CompressionStrategy
+
+/// The strategy parameter for zlib compression.
+/// The strategy is used to tune the compression algorithm, it affects the 
+/// compression ratio but not the correctness of the compressed output.
+/// For more information, see [zlib manual](http://www.zlib.net/manual.html).
 public enum CompressionStrategy: Int32 {
-    case defaultStrategy = 0, filtered, huffmanOnly, rle, fixed
+    
+    /// The default strategy (for normal data).
+    case defaultStrategy = 0
+    
+    /// Force more Huffman coding and less string matching.
+    case filtered = 1
+    
+    /// Force Huffman encoding only (no string match).
+    case huffmanOnly = 2
+    
+    /// Limit match distances to one (run-length encoding).
+    case rle = 3
+    
+    /// Prevent the use of dynamic Huffman codes.
+    case fixed = 4
 }
