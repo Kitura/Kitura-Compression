@@ -83,6 +83,7 @@ public class Compression : RouterMiddleware {
         }
         
         print("Compression:handle: method = ", encodingMethod)
+        print("Compression:handle: Accept-Encoding = ", request.headers["Accept-Encoding"])
         
         var previousWrittenDataFilter: WrittenDataFilter? = nil
         let writtenDataFilter: WrittenDataFilter = { body in
