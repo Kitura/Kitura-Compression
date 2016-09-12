@@ -31,7 +31,7 @@ public enum CompressionStrategy: Int32 {
     /// Force Huffman encoding only (no string match).
     case huffmanOnly = 2
     
-    /// Limit match distances to one (run-length encoding)
+    /// Limit match distances to one (run-length encoding).
     case rle = 3
     
     /// Prevent the use of dynamic Huffman codes.
