@@ -14,9 +14,17 @@
  * limitations under the License.
  **/
 
+// MARK CompressionLevel
+
+/// The level of zlib compression to apply.
+/// For more information, see [zlib manual](http://www.zlib.net/manual.html).
 public enum CompressionLevel: Int32 {
+    /// No compression is performed - the input data is simply copied a block at a time.
     case noCompression = 0
+    /// Best speed.
     case bestSpeed = 1
+    /// Best compression.
     case bestCompression = 9
+    /// A compromise between speed and compression.
     case defaultCompression = -1 
 }

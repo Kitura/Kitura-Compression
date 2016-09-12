@@ -20,18 +20,41 @@ import LoggerAPI
 
 import Foundation
 
+// MARK Compression
+
+/// A middleware for compressing body data sent back to the client. 
+/// Supports deflate and gzip compression methods. Uses [zlib](http://zlib.net/).
 public class Compression : RouterMiddleware {
     
-    public var threshold : Int
+    /// The byte threshold for the response body size before 
+    /// compression is considered for the response.
+    /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
+    public var threshold: Int
     
-    public var chunkSize : Int
+    /// The size of internal output slab buffer in bytes.
+    /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
+    public var chunkSize: Int
     
-    public var compressionLevel : CompressionLevel
+    /// The level of zlib compression to apply. 
+    /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
+    public var compressionLevel: CompressionLevel
     
-    public var compressionStrategy : CompressionStrategy
+    /// The strategy of zlib compression to apply.
+    /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
+    public var compressionStrategy: CompressionStrategy
     
-    public var memoryLevel : Int32
+    /// The level of the memory to specify how much memory should be 
+    /// allocated for the internal compression state.
+    /// For more information, see [zlib manual](http://www.zlib.net/manual.html).
+    public var memoryLevel: Int32
     
+    /// Initialize an instance of `Compression`.
+    ///
+    /// - Parameter threshold: The byte threshold for the response body size
+    /// - Parameter chunkSize: The size of internal output slab buffer in bytes.
+    /// - Parameter compressionLevel: The level of zlib compression to apply.
+    /// - Parameter compressionStrategy: The strategy of zlib compression to apply.
+    /// - Parameter memoryLevel: The level of the memory to be allocated during the compression.
     public init (threshold: Int = 1024, chunkSize: Int = 65536, compressionLevel: CompressionLevel = CompressionLevel.defaultCompression, compressionStrategy: CompressionStrategy = CompressionStrategy.defaultStrategy, memoryLevel: Int32 = 8) {
         self.threshold = threshold
         self.chunkSize = chunkSize
@@ -40,8 +63,19 @@ public class Compression : RouterMiddleware {
         self.memoryLevel = memoryLevel
     }
     
+    /// Handle an incoming request: compress the body of the response.
+    ///
+    /// - Parameter request: The `RouterRequest` object used to get information
+    ///                     about the request.
+    /// - Parameter response: The `RouterResponse` object used to respond to the
+    ///                       request.
+    /// - Parameter next: The closure to invoke to enable the Router to check for
+    ///                  other handlers or middleware to work with this request.
+    ///
+    /// - Throws: Any `ErrorType`. If an error is thrown, processing of the request
+    ///          is stopped, the error handlers, if any are defined, will be invoked,
+    ///          and the user will get a response with a status code of 500.
     public func handle(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws {
-        
         guard let encodingMethod = request.accepts(header: "Accept-Encoding", types: ["gzip", "deflate", "identity"]), encodingMethod != "identity" else {
                 Log.info("Not compressed: couldn't find acceptable encoding")
                 next()
