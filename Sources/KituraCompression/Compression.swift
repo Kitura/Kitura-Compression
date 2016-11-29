@@ -85,7 +85,7 @@ public class Compression : RouterMiddleware {
         var previousWrittenDataFilter: WrittenDataFilter? = nil
         let writtenDataFilter: WrittenDataFilter = { body in
             guard body.count > self.threshold else {
-                Log.info("Not compressed: body \(body.count) is smaller than the threshold \(self.threshold)")
+                Log.debug("Not compressed: body \(body.count) is smaller than the threshold \(self.threshold)")
                 return previousWrittenDataFilter!(body)
             }
             
