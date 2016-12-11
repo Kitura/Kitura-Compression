@@ -83,20 +83,26 @@ public class Compression : RouterMiddleware {
         }
                 
         var previousWrittenDataFilter: WrittenDataFilter? = nil
-        let writtenDataFilter: WrittenDataFilter = { body in
+        weak var weakResponse = response
+        let writtenDataFilter: WrittenDataFilter = { (body) in
+            guard let previousWrittenDataFilter = previousWrittenDataFilter else {
+                Log.error("Unexpectedly nil previousWrittenDataFilter")
+                return Data()
+            }
+            guard let response = weakResponse else {return previousWrittenDataFilter(body)}
             guard body.count > self.threshold else {
                 Log.debug("Not compressed: body \(body.count) is smaller than the threshold \(self.threshold)")
-                return previousWrittenDataFilter!(body)
+                return previousWrittenDataFilter(body)
             }
             
             guard let compressed = self.compress(body, method: encodingMethod) else {
                 Log.info("Not compressed: compression failed")
-                return previousWrittenDataFilter!(body)
+                return previousWrittenDataFilter(body)
             }
             
             response.headers["Content-Encoding"] = encodingMethod
             response.headers["Content-Length"] = String(compressed.count)
-            return previousWrittenDataFilter!(compressed)
+            return previousWrittenDataFilter(compressed)
         }
         previousWrittenDataFilter = response.setWrittenDataFilter(writtenDataFilter)
         
