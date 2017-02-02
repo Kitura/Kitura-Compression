@@ -126,6 +126,7 @@ public class Compression : RouterMiddleware {
             guard deflateInit2_(&stream, compressionLevel.rawValue, Z_DEFLATED,
                                 windowBits, memoryLevel, compressionStrategy.rawValue,
                                 ZLIB_VERSION, Int32(MemoryLayout<z_stream>.size)) == Z_OK else {
+                deflateEnd(&stream)
                 return nil
             }
         
