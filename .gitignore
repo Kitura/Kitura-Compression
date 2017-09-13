@@ -1,4 +1,4 @@
-KituraCompression.xcodeproj
+*.xcodeproj
 Packages
 .build
-
+Package.resolved
