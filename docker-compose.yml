@@ -1,0 +1,5 @@
+test:
+  image: ibmcom/swift-ubuntu:4.0
+  volumes:
+      - .:/Kitura-Compression
+command: bash -c "cd /Kitura-Compression && swift package clean && swift build"

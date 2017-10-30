@@ -16,7 +16,7 @@ Kitura compression middleware for compressing body data sent back to the client.
 * [License](#license)
 
 ## Swift version
-The latest version of Kitura-Compression requires **Swift 3.0**. You can download this version of the Swift binaries by following this [link](https://swift.org/download/). Compatibility with other Swift versions is not guaranteed.
+The latest version of Kitura-CredentialsFacebook requires **Swift 4.0**. You can download this version of the Swift binaries by following this [link](https://swift.org/download/). Compatibility with other Swift versions is not guaranteed.
 
 
 ## API
