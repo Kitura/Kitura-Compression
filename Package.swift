@@ -1,5 +1,7 @@
+// swift-tools-version:4.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 /**
- * Copyright IBM Corporation 2016, 2017
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +20,27 @@ import PackageDescription
 
 let package = Package(
     name: "KituraCompression",
-        dependencies: [
-            .Package(url: "https://github.com/IBM-Swift/Kitura.git", majorVersion: 1, minor: 7),
-            .Package(url: "https://github.com/IBM-Swift/CZlib.git", majorVersion: 0, minor: 1),
-            ]
+    products: [
+        // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        .library(
+            name: "KituraCompression",
+            targets: ["KituraCompression"]
+        )
+    ],
+    dependencies: [
+        .package(url: "https://github.com/IBM-Swift/Kitura.git", .upToNextMinor(from: "2.0.0")),
+        .package(url: "https://github.com/IBM-Swift/CZlib.git", .upToNextMinor(from: "0.1.0"))
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
+        .target(
+            name: "KituraCompression",
+            dependencies: ["Kitura", "CZlib"]
+        ),
+        .testTarget(
+            name: "KituraCompressionTests",
+            dependencies: ["KituraCompression"]
+        )
+    ]
 )
