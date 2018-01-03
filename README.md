@@ -1,7 +1,7 @@
 # Kitura-Compression
 Kitura compression middleware
 
-[![Build Status - Master](https://travis-ci.org/IBM-Swift/Kitura.svg?branch=master)](https://travis-ci.org/IBM-Swift/Kitura-Compression)
+[![Build Status](https://travis-ci.org/IBM-Swift/Kitura-Compression.svg?branch=master)](https://travis-ci.org/IBM-Swift/Kitura-Compression)
 ![Mac OS X](https://img.shields.io/badge/os-Mac%20OS%20X-green.svg?style=flat)
 ![Linux](https://img.shields.io/badge/os-linux-green.svg?style=flat)
 ![Apache 2](https://img.shields.io/badge/license-Apache2-blue.svg?style=flat)
@@ -16,7 +16,7 @@ Kitura compression middleware for compressing body data sent back to the client.
 * [License](#license)
 
 ## Swift version
-The latest version of Kitura-Compression requires **Swift 4.0**. You can download this version of the Swift binaries by following this [link](https://swift.org/download/). Compatibility with other Swift versions is not guaranteed.
+The latest version of Kitura-Compression requires **Swift 4.0** or newer. You can download this version of the Swift binaries by following this [link](https://swift.org/download/). Compatibility with other Swift versions is not guaranteed.
 
 
 ## API
