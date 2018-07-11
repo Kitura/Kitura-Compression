@@ -4,14 +4,16 @@ branches:
     - develop
     - /^issue.*$/
 
-notifications:
-  slack:
-    secure: "nv1kMHlea4PuOu6YH20+Cay5bTcKLirkJFgSXo+2/lP24wx6nKtz4eUS9r1sZ8XlJCyNuQ7XjH7jDQwQpUtfTXkD27XrR1KrlOmLphxfzj8+T9meTwM/Q3Zb8dI7EfAWyqs4Z8iLzFkAviWAIPy8vrk6baN7AwjOHUgnya+3RxBEAg7xsbocwgPilJ0HIB+VhWIIhzrlGNuBj6BQ/D+VyTQTbTZzxYHkZEsPjEvGgAQamGBF6sw6/G11r+bCxilG9r7TVS/jV96vTzzXGJ2hzv3uixTR9nylaxhQYybZQ96JTt1YN1TBF+iSxfx/gjFKvCPMxWvhPEkTCs7zkWThohGpKcy2nRo332zHZ5Ti61jWL0sPUMSU6q5BlBE3flNiqRzaF8Jc1wthxsESEX8rNfmx92Eb2Tet3LjU/VP21lR9WEIGo934np1yrSpaPYweBdNyg1pPzSJeUdSjXHG/4lEEnqQ0TEttdxfaXfPFWQ+qEZUvSsR20gwI3xQA8rFsPZDa39gEBVgLAj+mzKVK3ExfWVTmdsSOqL45MDsnvracZUetMuAKt3ClrGPDCe2whoXWVcX9/7AwUfXbE1YhkpMstAFOsuAyaOYIsfw/fUset1tGv8vjJM6+/cWRueDsTKxT4RkCIW2lQEu1qAJPeuXYXTnNROLAISlnXmGWKvk="
-
 matrix:
   include:
     - os: linux
       dist: trusty
+      sudo: required
+    - os: osx
+      osx_image: xcode9.2
+      sudo: required
+    - os: osx
+      osx_image: xcode9.3
       sudo: required
     - os: osx
       osx_image: xcode9.4
