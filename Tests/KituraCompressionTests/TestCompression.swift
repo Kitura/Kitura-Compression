@@ -46,7 +46,7 @@ class TestCompression : XCTestCase {
     
     static let body2 = "Sometime too hot the eye of heaven shines"
 
-    static let compressedBodyGzip = "H4sIAAAAAAAAAz2OMQ4CMQwEv7IdDS+gQZQUNMAHDDHnE058ShxQfo8PJBpLlndmfRFSxRF3ywtVhgvHMBBaz5nrpiHR2OMq1kHVkS1Sai/WASrptzvnhSs573C2Pgnec0lBGprQ82sNTdW5TLj1uNgDJxpbHMLwL1KmxhBywfqU24pbdFLA4f4Atgml9qwAAAA="
+    static let compressedBodyGzip = "H4sIAAAAAAAAEz2OMQ4CMQwEv7IdDS+gQZQUNMAHDDHnE058ShxQfo8PJBpLlndmfRFSxRF3ywtVhgvHMBBaz5nrpiHR2OMq1kHVkS1Sai/WASrptzvnhSs573C2Pgnec0lBGprQ82sNTdW5TLj1uNgDJxpbHMLwL1KmxhBywfqU24pbdFLA4f4Atgml9qwAAAA="
 
     static let compressedBodyDeflate = "eJw9jjEOAjEMBL+yHQ0voEGUFDTABwwx5xNOfEocUH6PDyQaS5Z3Zn0RUsURd8sLVYYLxzAQWs+Z66Yh0djjKtZB1ZEtUmov1gEq6bc754UrOe9wtj4J3nNJQRqa0PNrDU3VuUy49bjYAycaWxzC8C9SpsYQcsH6lNuKW3RSwOH+AJYbPMU="
     
