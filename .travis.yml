@@ -6,12 +6,12 @@ branches:
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: required
-#    - os: osx
-#      osx_image: xcode9.2
+#    - os: linux
+#      dist: trusty
 #      sudo: required
+    - os: osx
+      osx_image: xcode9.2
+      sudo: required
 #    - os: osx
 #      osx_image: xcode9.3
 #      sudo: required
@@ -24,9 +24,9 @@ before_install:
 
 script:
   - head -10 /usr/include/zlib.h
-  - wget "https://zlib.net/fossils/zlib-1.2.11.tar.gz"
-  - tar -xzf zlib-1.2.11.tar.gz
-  - cd zlib-1.2.11
+  - wget "https://zlib.net/fossils/zlib-1.2.9.tar.gz"
+  - tar -xzf zlib-1.2.9.tar.gz
+  - cd zlib-1.2.9
   - ./configure --prefix=/usr
   - sudo make
   - sudo make install
