@@ -27,7 +27,7 @@ script:
   - wget "https://zlib.net/fossils/zlib-1.2.9.tar.gz"
   - tar -xzf zlib-1.2.9.tar.gz
   - cd zlib-1.2.9
-  - ./configure
+  - ./configure --prefix=/usr
   - sudo make
   - sudo make install
   - head -10 /usr/include/zlib.h
