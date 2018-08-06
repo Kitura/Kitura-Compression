@@ -23,7 +23,10 @@ before_install:
   - git clone https://github.com/IBM-Swift/Package-Builder.git
 
 script:
+  - head -10 /usr/include/zlib.h
+  - wget "https://zlib.net/fossils/zlib-1.2.9.tar.gz"
+  - cd zlib-1.2.9
+  - sudo make
+  - head -10 /usr/include/zlib.h
   - ./Package-Builder/build-package.sh -projectDir $TRAVIS_BUILD_DIR
-  - head -10 /usr/include/zlib.h
-  - sudo apt-get install zlib1g-dev=1.2.9
-  - head -10 /usr/include/zlib.h
+
