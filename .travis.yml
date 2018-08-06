@@ -24,8 +24,8 @@ before_install:
 
 script:
   - head -10 /usr/include/zlib.h
-  - wget "https://zlib.net/fossils/zlib-1.2.9.tar.gz"
-  - tar -xzf zlib-1.2.9.tar.gz
+  - wget "https://zlib.net/fossils/zlib-1.2.10.tar.gz"
+  - tar -xzf zlib-1.2.10.tar.gz
   - cd zlib-1.2.9
   - ./configure --prefix=/usr
   - sudo make
