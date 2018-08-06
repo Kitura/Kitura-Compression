@@ -127,6 +127,7 @@ class TestCompression : XCTestCase {
         router.get("/sonnet18/1") { _, response, next in
             do {
                 try response.send(body1).end()
+                
             }
             catch {}
             next()
