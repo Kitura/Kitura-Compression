@@ -65,7 +65,12 @@ class TestCompression : XCTestCase {
                         XCTFail("No response body")
                         return
                     }
-                    XCTAssertEqual(body.base64EncodedString(), TestCompression.compressedBodyGzip)
+                    if let decompressedData = try? body.decompress() {
+                        let recreatedString = String(data: decompressedData, encoding: .utf8)
+                        XCTAssertEqual(TestCompression.body1, recreatedString)
+                    } else {
+                        XCTFail("Unable to decompress")
+                    }
                 }
                 catch{
                     XCTFail("No response body")
