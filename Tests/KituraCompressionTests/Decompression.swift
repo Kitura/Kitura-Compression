@@ -21,7 +21,7 @@ import LoggerAPI
 import Foundation
 
 enum UnzipError: Error {
-    case unzipError()
+    case unzipError
 }
 
 extension Data {
@@ -30,7 +30,7 @@ extension Data {
         self.withUnsafeBytes { (bytes: UnsafePointer<Bytef>) in
             stream.next_in = UnsafeMutablePointer<Bytef>(mutating: bytes)
         }
-        stream.avail_in = uint(self.count)
+        stream.avail_in = UInt32(self.count)
         
         return stream
     }
@@ -39,10 +39,10 @@ extension Data {
 
         let contiguousData = self.withUnsafeBytes { Data(bytes: $0, count: self.count) }
         var stream = contiguousData.createStream()
-        var status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(DataSize.stream))
+        var status = inflateInit2_(&stream, MAX_WBITS + 32, ZLIB_VERSION, Int32(MemoryLayout<z_stream>.size))
         
         guard status == Z_OK else {
-            throw UnzipError.unzipError()
+            throw UnzipError.unzipError
         }
         
         var data = Data(capacity: contiguousData.count * 2)
@@ -62,16 +62,10 @@ extension Data {
         } while status == Z_OK
         
         guard inflateEnd(&stream) == Z_OK && status == Z_STREAM_END else {
-            throw UnzipError.unzipError()
+            throw UnzipError.unzipError
         }
         
         data.count = Int(stream.total_out)
         return data
     }
-}
-
-private struct DataSize {
-    static let chunk = 2 ^ 14
-    static let stream = MemoryLayout<z_stream>.size
-    private init() { }
 }
