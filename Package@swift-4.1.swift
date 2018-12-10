@@ -29,7 +29,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.1.0"),
-        .package(url: "/home/djones6/swift5/test2/Kitura-Compression/CZlib", .branch("master"))
+        .package(url: "https://github.com/IBM-Swift/CZlib.git", .upToNextMinor(from: "0.1.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
