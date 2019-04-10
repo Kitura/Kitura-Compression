@@ -114,7 +114,8 @@ public class Compression : RouterMiddleware {
     private func compress(_ inputData: Data, method: String) -> Data? {
         
         return inputData.withUnsafeBytes() { (bytes: UnsafeRawBufferPointer) -> Data? in
-            let mutableBytes = UnsafeMutableRawPointer(mutating: bytes.baseAddress!).assumingMemoryBound(to: Bytef.self)
+            guard let baseAddress = bytes.baseAddress else { return nil }
+            let mutableBytes = UnsafeMutableRawPointer(mutating: baseAddress).assumingMemoryBound(to: Bytef.self)
             var stream = z_stream(next_in: mutableBytes,
                                   avail_in: uint(inputData.count),
                                   total_in: 0, next_out: nil, avail_out: 0,

@@ -24,12 +24,5 @@ internal extension Data {
             try body(UnsafeRawBufferPointer(start: p, count: c))
         }
     }
-    
-    mutating func withUnsafeMutableBytes<T>(_ body: (UnsafeMutableRawBufferPointer) throws -> T) rethrows -> T {
-        let c = count
-        return try withUnsafeMutableBytes { (p: UnsafeMutablePointer<UInt8>) throws -> T in
-            try body(UnsafeMutableRawBufferPointer(start: p, count: c))
-        }
-    }
 }
 #endif
