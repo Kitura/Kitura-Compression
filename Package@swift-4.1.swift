@@ -28,7 +28,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/Kitura/Kitura.git", from: "2.1.0"),
+        .package(url: "https://github.com/Kitura/Kitura.git", from: "2.9.200"),
         .package(url: "https://github.com/Kitura/CZlib.git", .upToNextMinor(from: "0.1.0"))
     ],
     targets: [
