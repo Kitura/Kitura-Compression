@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CompressionLevel Enum Reference</title>
+    <title>CompressionLevel Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
     <a name="//apple_ref/swift/Enum/CompressionLevel" class="dashAnchor"></a>
 
-    <a title="CompressionLevel Enum Reference"></a>
+    <a title="CompressionLevel Enumeration Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -23,8 +26,14 @@
          (100% documented)
       </p>
     
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
         <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/IBM-Swift/Kitura-Compression/">
+          <a class="header-link" href="https://github.com/Kitura/Kitura-Compression/">
             <img class="header-icon" src="../img/gh.png"/>
             View on GitHub
           </a>
@@ -35,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">KituraCompression Reference</a>
       <img class="carat" src="../img/carat.png" />
-      CompressionLevel Enum Reference
+      CompressionLevel Enumeration Reference
     </p>
 
     <div class="content-wrapper">
@@ -50,7 +59,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/CompressionLevel.html">CompressionLevel</a>
@@ -65,11 +74,12 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>CompressionLevel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CompressionLevel</span><span class="p">:</span> <span class="kt">Int32</span></code></pre>
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">CompressionLevel</span> <span class="p">:</span> <span class="kt">Int32</span></code></pre>
 
                 </div>
               </div>
@@ -86,9 +96,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17KituraCompression16CompressionLevel13noCompressionFMS0_S0_"></a>
+                    <a name="/s:17KituraCompression0B5LevelO02noB0yA2CmF"></a>
                     <a name="//apple_ref/swift/Element/noCompression" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17KituraCompression16CompressionLevel13noCompressionFMS0_S0_">noCompression</a>
+                    <a class="token" href="#/s:17KituraCompression0B5LevelO02noB0yA2CmF">noCompression</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -103,23 +113,19 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">noCompression</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noCompression</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17KituraCompression16CompressionLevel9bestSpeedFMS0_S0_"></a>
+                    <a name="/s:17KituraCompression0B5LevelO9bestSpeedyA2CmF"></a>
                     <a name="//apple_ref/swift/Element/bestSpeed" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17KituraCompression16CompressionLevel9bestSpeedFMS0_S0_">bestSpeed</a>
+                    <a class="token" href="#/s:17KituraCompression0B5LevelO9bestSpeedyA2CmF">bestSpeed</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -134,23 +140,19 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">bestSpeed</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">bestSpeed</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17KituraCompression16CompressionLevel15bestCompressionFMS0_S0_"></a>
+                    <a name="/s:17KituraCompression0B5LevelO04bestB0yA2CmF"></a>
                     <a name="//apple_ref/swift/Element/bestCompression" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17KituraCompression16CompressionLevel15bestCompressionFMS0_S0_">bestCompression</a>
+                    <a class="token" href="#/s:17KituraCompression0B5LevelO04bestB0yA2CmF">bestCompression</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -165,23 +167,19 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">bestCompression</span> <span class="o">=</span> <span class="mi">9</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">bestCompression</span> <span class="o">=</span> <span class="mi">9</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO17KituraCompression16CompressionLevel18defaultCompressionFMS0_S0_"></a>
+                    <a name="/s:17KituraCompression0B5LevelO07defaultB0yA2CmF"></a>
                     <a name="//apple_ref/swift/Element/defaultCompression" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO17KituraCompression16CompressionLevel18defaultCompressionFMS0_S0_">defaultCompression</a>
+                    <a class="token" href="#/s:17KituraCompression0B5LevelO07defaultB0yA2CmF">defaultCompression</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -196,7 +194,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">defaultCompression</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">defaultCompression</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></code></pre>
 
                         </div>
                       </div>
@@ -211,8 +209,8 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-09-22)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">IBM &amp; Kitura Project Contributors</a>. All rights reserved. (Last updated: 2020-11-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -8,6 +8,9 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -23,8 +26,14 @@
          (100% documented)
       </p>
     
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
         <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/IBM-Swift/Kitura-Compression/">
+          <a class="header-link" href="https://github.com/Kitura/Kitura-Compression/">
             <img class="header-icon" src="../img/gh.png"/>
             View on GitHub
           </a>
@@ -50,7 +59,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums/CompressionLevel.html">CompressionLevel</a>
@@ -65,11 +74,12 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>Compression</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Compression</span> <span class="p">:</span> <span class="kt">RouterMiddleware</span></code></pre>
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Compression</span> <span class="p">:</span> <span class="kt">RouterMiddleware</span></code></pre>
 
                 </div>
               </div>
@@ -86,9 +96,9 @@ Supports the deflate and the gzip compression methods. Uses <a href="http://zlib
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17KituraCompression11Compression9thresholdSi"></a>
+                    <a name="/s:17KituraCompression0B0C9thresholdSivp"></a>
                     <a name="//apple_ref/swift/Property/threshold" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17KituraCompression11Compression9thresholdSi">threshold</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C9thresholdSivp">threshold</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -105,7 +115,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -115,9 +125,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17KituraCompression11Compression9chunkSizeSi"></a>
+                    <a name="/s:17KituraCompression0B0C9chunkSizeSivp"></a>
                     <a name="//apple_ref/swift/Property/chunkSize" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17KituraCompression11Compression9chunkSizeSi">chunkSize</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C9chunkSizeSivp">chunkSize</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -133,7 +143,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">chunkSize</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">chunkSize</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -143,9 +153,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17KituraCompression11Compression16compressionLevelOS_16CompressionLevel"></a>
+                    <a name="/s:17KituraCompression0B0C16compressionLevelAA0bD0Ovp"></a>
                     <a name="//apple_ref/swift/Property/compressionLevel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17KituraCompression11Compression16compressionLevelOS_16CompressionLevel">compressionLevel</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C16compressionLevelAA0bD0Ovp">compressionLevel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -161,7 +171,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">compressionLevel</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">compressionLevel</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span></code></pre>
 
                         </div>
                       </div>
@@ -171,9 +181,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17KituraCompression11Compression19compressionStrategyOS_19CompressionStrategy"></a>
+                    <a name="/s:17KituraCompression0B0C19compressionStrategyAA0bD0Ovp"></a>
                     <a name="//apple_ref/swift/Property/compressionStrategy" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17KituraCompression11Compression19compressionStrategyOS_19CompressionStrategy">compressionStrategy</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C19compressionStrategyAA0bD0Ovp">compressionStrategy</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -189,7 +199,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">compressionStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">compressionStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span></code></pre>
 
                         </div>
                       </div>
@@ -199,9 +209,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17KituraCompression11Compression11memoryLevelVs5Int32"></a>
+                    <a name="/s:17KituraCompression0B0C11memoryLevels5Int32Vvp"></a>
                     <a name="//apple_ref/swift/Property/memoryLevel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17KituraCompression11Compression11memoryLevelVs5Int32">memoryLevel</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C11memoryLevels5Int32Vvp">memoryLevel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -218,7 +228,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">memoryLevel</span><span class="p">:</span> <span class="kt">Int32</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">memoryLevel</span><span class="p">:</span> <span class="kt">Int32</span></code></pre>
 
                         </div>
                       </div>
@@ -228,9 +238,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17KituraCompression11CompressioncFT9thresholdSi9chunkSizeSi16compressionLevelOS_16CompressionLevel19compressionStrategyOS_19CompressionStrategy11memoryLevelVs5Int32_S0_"></a>
+                    <a name="/s:17KituraCompression0B0C9threshold9chunkSize16compressionLevel0F8Strategy06memoryG0ACSi_SiAA0bG0OAA0bH0Os5Int32Vtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(threshold:chunkSize:compressionLevel:compressionStrategy:memoryLevel:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17KituraCompression11CompressioncFT9thresholdSi9chunkSizeSi16compressionLevelOS_16CompressionLevel19compressionStrategyOS_19CompressionStrategy11memoryLevelVs5Int32_S0_">init(threshold:chunkSize:compressionLevel:compressionStrategy:memoryLevel:)</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C9threshold9chunkSize16compressionLevel0F8Strategy06memoryG0ACSi_SiAA0bG0OAA0bH0Os5Int32Vtcfc">init(threshold:<wbr>chunkSize:<wbr>compressionLevel:<wbr>compressionStrategy:<wbr>memoryLevel:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,42 +250,12 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                       <div class="abstract">
                         <p>Initialize an instance of <code>Compression</code>.</p>
 
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter threshold: The byte count threshold for the response body size.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter chunkSize: The size of the internal output slab buffer in bytes.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter compressionLevel: The level of zlib compression to apply.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter compressionStrategy: The strategy of zlib compression to apply.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter memoryLevel: The level of the memory to be allocated during the compression.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="nv">threshold</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span> <span class="nv">chunkSize</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">65536</span><span class="p">,</span> <span class="nv">compressionLevel</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span><span class="o">.</span><span class="n">defaultCompression</span><span class="p">,</span> <span class="nv">compressionStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span><span class="o">.</span><span class="n">defaultStrategy</span><span class="p">,</span> <span class="nv">memoryLevel</span><span class="p">:</span> <span class="kt">Int32</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">threshold</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span> <span class="nv">chunkSize</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">65536</span><span class="p">,</span> <span class="nv">compressionLevel</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/CompressionLevel.html">CompressionLevel</a></span><span class="o">.</span><span class="n">defaultCompression</span><span class="p">,</span> <span class="nv">compressionStrategy</span><span class="p">:</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span> <span class="o">=</span> <span class="kt"><a href="../Enums/CompressionStrategy.html">CompressionStrategy</a></span><span class="o">.</span><span class="n">defaultStrategy</span><span class="p">,</span> <span class="nv">memoryLevel</span><span class="p">:</span> <span class="kt">Int32</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -292,7 +272,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               <td>
                                 <div>
                                   <p>The byte count threshold for the response body size.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -305,7 +284,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               <td>
                                 <div>
                                   <p>The size of the internal output slab buffer in bytes.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -318,7 +296,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               <td>
                                 <div>
                                   <p>The level of zlib compression to apply.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -331,7 +308,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               <td>
                                 <div>
                                   <p>The strategy of zlib compression to apply.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -344,7 +320,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               <td>
                                 <div>
                                   <p>The level of the memory to be allocated during the compression.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -357,9 +332,9 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17KituraCompression11Compression6handleERR"></a>
+                    <a name="/s:17KituraCompression0B0C6handle7request8response4nexty0A013RouterRequestC_AH0G8ResponseCyyctKF"></a>
                     <a name="//apple_ref/swift/Method/handle(request:response:next:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17KituraCompression11Compression6handleERR">handle(request:response:next:)</a>
+                    <a class="token" href="#/s:17KituraCompression0B0C6handle7request8response4nexty0A013RouterRequestC_AH0G8ResponseCyyctKF">handle(request:<wbr>response:<wbr>next:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -368,28 +343,6 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Handle an incoming request, compressing the body of the response, if applicable.</p>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter request: The <code>RouterRequest</code> object used to get information
-                about the request.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    Parameter response: The <code>RouterResponse</code> object used to respond to the
-                  request.
-
-</div>
-
-<div class="aside aside-parameter">
-    <p class="aside-title">Parameter</p>
-    <p>Parameter next: The closure to invoke to enable the Router to check for
-             other handlers or middleware to work with this request.</p>
-
-</div>
-
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <p>Any <code>ErrorType</code>. If an error is thrown, processing of the request
@@ -403,7 +356,7 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">RouterRequest</span><span class="p">,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">RouterResponse</span><span class="p">,</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="kt">RouterRequest</span><span class="p">,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">RouterResponse</span><span class="p">,</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -419,8 +372,8 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code>RouterRequest</code> object used to get information about the request.</p>
-
+                                  <p>The <code>RouterRequest</code> object used to get information
+                about the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -432,8 +385,8 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code>RouterResponse</code> object used to respond to the request.</p>
-
+                                  <p>The <code>RouterResponse</code> object used to respond to the
+                  request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -445,8 +398,8 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
                               </td>
                               <td>
                                 <div>
-                                  <p>The closure to invoke to enable the Router to check for other handlers or middleware to work with this request.</p>
-
+                                  <p>The closure to invoke to enable the Router to check for
+             other handlers or middleware to work with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -464,8 +417,8 @@ For more information, see <a href="http://www.zlib.net/manual.html">zlib manual<
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-09-22)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">IBM &amp; Kitura Project Contributors</a>. All rights reserved. (Last updated: 2020-11-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
