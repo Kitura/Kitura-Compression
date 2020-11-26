@@ -8,6 +8,9 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
 
@@ -22,8 +25,14 @@
          (100% documented)
       </p>
     
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
         <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/IBM-Swift/Kitura-Compression/">
+          <a class="header-link" href="https://github.com/Kitura/Kitura-Compression/">
             <img class="header-icon" src="img/gh.png"/>
             View on GitHub
           </a>
@@ -49,7 +58,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/CompressionLevel.html">CompressionLevel</a>
@@ -64,58 +73,82 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             
-            <a href='#kitura-compression' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='kitura-compression'>Kitura-Compression</h1>
+            <p align="center">
+    <a href="http://kitura.io/">
+        <img src="https://raw.githubusercontent.com/Kitura/Kitura/master/Sources/Kitura/resources/kitura-bird.svg?sanitize=true" height="100" alt="Kitura">
+    </a>
+</p>
 
-<p>Kitura compression middleware</p>
-
-<p><a href="https://travis-ci.org/IBM-Swift/Kitura-Compression"><img src="https://travis-ci.org/IBM-Swift/Kitura.svg?branch=master" alt="Build Status - Master"></a>
-<img src="https://img.shields.io/badge/os-Mac%20OS%20X-green.svg?style=flat" alt="Mac OS X">
-<img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
-<img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2"></p>
-<a href='#summary' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='summary'>Summary</h2>
+<p align="center">
+    <a href="https://kitura.github.io/Kitura-Compression/index.html">
+    <img src="https://img.shields.io/badge/apidoc-KituraCompression-1FBCE4.svg?style=flat" alt="APIDoc">
+    </a>
+    <a href="https://travis-ci.org/Kitura/Kitura-Compression">
+    <img src="https://travis-ci.org/Kitura/Kitura-Compression.svg?branch=master" alt="Build Status - Master">
+    </a>
+    <img src="https://img.shields.io/badge/os-macOS-green.svg?style=flat" alt="macOS">
+    <img src="https://img.shields.io/badge/os-linux-green.svg?style=flat" alt="Linux">
+    <img src="https://img.shields.io/badge/license-Apache2-blue.svg?style=flat" alt="Apache 2">
+    <a href="http://swift-at-ibm-slack.mybluemix.net/">
+    <img src="http://swift-at-ibm-slack.mybluemix.net/badge.svg" alt="Slack Status">
+    </a>
+</p>
+<h1 id='kitura-compression' class='heading'>Kitura-Compression</h1>
 
 <p>Kitura compression middleware for compressing body data sent back to the client. Supports <code>deflate</code> and <code>gzip</code> compression methods. Uses <a href="http://zlib.net/">zlib</a>.</p>
-<a href='#table-of-contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='table-of-contents'>Table of Contents</h2>
+<h2 id='swift-version' class='heading'>Swift version</h2>
 
-<ul>
-<li><a href="#swift-version">Swift version</a></li>
-<li><a href="#api">API</a></li>
-<li><a href="#license">License</a></li>
-</ul>
-<a href='#swift-version' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='swift-version'>Swift version</h2>
+<p>The latest version of Kitura-Compression requires <strong>Swift 4.0</strong> or newer. You can download this version of the Swift binaries by following this <a href="https://swift.org/download/">link</a>. Compatibility with other Swift versions is not guaranteed.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+<h4 id='add-dependencies' class='heading'>Add dependencies</h4>
 
-<p>The latest version of Kitura-Compression requires <strong>Swift 3.0</strong>. You can download this version of the Swift binaries by following this <a href="https://swift.org/download/">link</a>. Compatibility with other Swift versions is not guaranteed.</p>
-<a href='#api' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='api'>API</h2>
+<p>Add the <code>Kitura-Compression</code> package to the dependencies within your application’s <code>Package.swift</code> file. Substitute <code>&quot;x.x.x&quot;</code> with the latest <code>Kitura-Compression</code> <a href="https://github.com/Kitura/Kitura-Compression/releases">release</a>.</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/Kitura/Kitura-Compression.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"x.x.x"</span><span class="p">)</span>
+</code></pre>
 
-<p>In order to use compression middleware, create an instance of <code>Compression</code>, and connect it to the desired path:</p>
+<p>Add <code>KituraCompression</code> to your target&rsquo;s dependencies:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"example"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"KituraCompression"</span><span class="p">]),</span>
+</code></pre>
+<h4 id='import-package' class='heading'>Import package</h4>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">KituraCompression</span>
+</code></pre>
+<h4 id='using-compression' class='heading'>Using Compression</h4>
+
+<p>In order to use compression middleware, create an instance of <code><a href="Classes/Compression.html">Compression</a></code>, and connect it to the desired path:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">KituraCompression</span>
 
 <span class="n">router</span><span class="o">.</span><span class="nf">all</span><span class="p">(</span><span class="nv">middleware</span><span class="p">:</span> <span class="kt">Compression</span><span class="p">())</span>
 </code></pre>
 
-<p>You can configure <code>Compression</code> with optional arguments:
-<code>swift
-    public init (threshold: Int = 1024, chunkSize: Int = 16384, compressionLevel: CompressionLevel = CompressionLevel.defaultCompression, compressionStrategy: CompressionStrategy = CompressionStrategy.defaultStrategy, memoryLevel: Int32 = 8)
-</code>
-<strong>Where:</strong>
-   - <em>threshold</em> is the byte threshold for the response body size before compression is considered for the response, defaults to 1024.</p>
+<p>You can configure <code><a href="Classes/Compression.html">Compression</a></code> with optional arguments:</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="nv">threshold</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span> <span class="nv">chunkSize</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">16384</span><span class="p">,</span> <span class="nv">compressionLevel</span><span class="p">:</span> <span class="kt">CompressionLevel</span> <span class="o">=</span> <span class="kt">CompressionLevel</span><span class="o">.</span><span class="n">defaultCompression</span><span class="p">,</span> <span class="nv">compressionStrategy</span><span class="p">:</span> <span class="kt">CompressionStrategy</span> <span class="o">=</span> <span class="kt">CompressionStrategy</span><span class="o">.</span><span class="n">defaultStrategy</span><span class="p">,</span> <span class="nv">memoryLevel</span><span class="p">:</span> <span class="kt">Int32</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+</code></pre>
+
+<p><strong>Where:</strong></p>
 
 <ul>
-<li><p><em>chunkSize</em> is the size of internal output slab buffer in bytes, defaults to 16384</p></li>
+<li><p><em>threshold</em> is the byte threshold for the response body size before compression is considered for the response, defaults to 1024.</p></li>
+<li><p><em>chunkSize</em> is the size of internal output slab buffer in bytes, defaults to 16384.</p></li>
 <li><p><em>compressionLevel</em> is the level of zlib compression to apply. The supported values are:<br>
 .noCompression, .bestSpeed, .bestCompression, .defaultCompression</p></li>
-<li><p><em>compressionStrategy</em> is used to tune the compression algorithm. Here are its possible values:<br>
+<li><p><em>compressionStrategy</em> is used to tune the compression algorithm. The possible values are:<br>
 .defaultStrategy, .filtered, .huffmanOnly, .rle, .fixed</p></li>
 <li><p><em>memoryLevel</em> specifies how much memory should be allocated
 for the internal compression state. The default value is 8.</p></li>
 </ul>
 
-<p>For more information on compression parameters, see  <a href="http://www.zlib.net/manual.html">zlib manual</a>.</p>
-<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+<p>For more information on compression parameters, see the <a href="http://www.zlib.net/manual.html">zlib manual</a>.</p>
+<h2 id='api-documentation' class='heading'>API Documentation</h2>
 
-<p>This library is licensed under Apache 2.0. Full license text is available in <a href="LICENSE.txt">LICENSE</a>.</p>
+<p>For more information visit our <a href="https://kitura.github.io/Kitura-Compression/index.html">API reference</a>.</p>
+<h2 id='community' class='heading'>Community</h2>
+
+<p>We love to talk server-side Swift, and Kitura. Join our <a href="http://swift-at-ibm-slack.mybluemix.net/">Slack</a> to meet the team!</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is available in <a href="https://github.com/Kitura/Kitura-Compression/blob/master/LICENSE.txt">LICENSE</a>.</p>
 
           </div>
         </section>
@@ -124,8 +157,8 @@ for the internal compression state. The default value is 8.</p></li>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">IBM</a>. All rights reserved. (Last updated: 2016-09-22)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">IBM &amp; Kitura Project Contributors</a>. All rights reserved. (Last updated: 2020-11-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
